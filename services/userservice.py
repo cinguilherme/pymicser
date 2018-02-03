@@ -1,17 +1,24 @@
 from flask import jsonify, Blueprint, blueprints, render_template, abort, request, make_response
 import json
 
+import services.users_db as db_service
+
 userBP = Blueprint("userBP", __name__)
 
 """
 UserServices BluePrint
 """
 
+""" API function get all users: if unnable to fetch from NSql,
+ fetch from local JSON"""
 @userBP.route("/users", methods=['GET'])
 def allUsers():
-    with open('provisoryData/users.json') as json_data:
-        j = json.load(json_data)
-        return jsonify({'users': j})
+    try:
+        return jsonify(db_service.get_all_users())
+    except:
+        with open('provisoryData/users.json') as json_data:
+            j = json.load(json_data)
+            return jsonify({'users': j})
 
 
 @userBP.route("/users/<int:userid>", methods=['GET'])
