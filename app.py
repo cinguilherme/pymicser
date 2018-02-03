@@ -6,6 +6,8 @@ import services.userservice as users
 
 app = Flask(__name__)
 
+app.register_blueprint(users.userBP)
+
 
 @app.route("/")
 def index():
@@ -19,26 +21,9 @@ def get_tasks():
         return jsonify({'tasks': j})
 
 
-@app.route("/users", methods=['GET'])
-def get_users():
-    return users.allUsers()
-
-
-@app.route("/users/<int:userid>", methods=['GET'])
-def get_user(userid):
-    return users.user(userid)
-
-
-@app.route("/users/add", methods=['POST'])
-def add_user():
-    request_post_json = request.json
-    return users.add_user(request_post_json)
-
-
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
-
+    return make_response(jsonify({'error': 'API function Not found'}), 404)
 
 if __name__ == "__main__":
     app.run(debug=True)
