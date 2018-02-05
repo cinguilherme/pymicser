@@ -1,7 +1,7 @@
 from flask import jsonify, Blueprint, blueprints, render_template, abort, request, make_response
 import json
 
-import services.users_db as db_service
+import services.user.users_db as db_service
 
 userBP = Blueprint("userBP", __name__)
 
@@ -11,6 +11,8 @@ UserServices BluePrint
 
 """ API function get all users: if unnable to fetch from NSql,
  fetch from local JSON"""
+
+
 @userBP.route("/users", methods=['GET'])
 def allUsers():
     try:
@@ -30,18 +32,15 @@ def user(userid):
         return jsonify({'user': user})
 
 
+@userBP.route("/users/byname/<username>", methods=['GET'])
+def user_by_name(username):
+    return jsonify(db_service.get_user_by_user_name(username))
+
+
 @userBP.route("/users/add", methods=['POST'])
 def add_user():
     addJson = request.json
-    with open('provisoryData/users.json') as json_data:
-        jusers = json.load(json_data)
-        user = {
-            'id': jusers[-1]['id'] + 1,
-            'active': "Ture",
-            'user_name': addJson.get('user_name', "")
-        }
-        jusers.append(user)
-        return jsonify({'users': jusers}), 201
+    return jsonify(db_service.add_new_user(addJson)), 201
 
 
 @userBP.route("/users/update/<int:userid>", methods=['PUT'])
