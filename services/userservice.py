@@ -12,9 +12,19 @@ UserServices BluePrint
 """ API function get all users: if unnable to fetch from NSql,
  fetch from local JSON"""
 
+@userBP.route("/users/doc", methods=['GET'])
+"""Exemplo de retorno de documentação de um método."""
+def users_doc():
+    return allUsers.__doc__
 
 @userBP.route("/users", methods=['GET'])
 def allUsers():
+    """
+    UserServices BluePrint
+
+    API function get all users: if unnable to fetch from NSql,
+     fetch from local JSON
+    """
     try:
         return jsonify(db_service.get_all_users())
     except:
