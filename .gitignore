@@ -1,0 +1,4 @@
+venv
+*.pyc
+build
+/services/__pycache__
