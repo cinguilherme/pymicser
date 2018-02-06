@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-MAINTAINER Cintra, Guilherme "cinguilherme@gmail.com"
+LABEL author="Cintra, Guilherme 'cinguilherme@gmail.com'"
 
 RUN adduser ubuntu
 
@@ -17,7 +17,7 @@ RUN apt-get update -y \
 WORKDIR /home/ubuntu/
 
 RUN git clone https://github.com/cinguilherme/pymicser.git \
-	&& mkdir user-service-f
+	&& mkdir user-service-f \
 	&& mv -R /home/ubuntu/pymicser/ /home/ubuntu/user-service-f/
 
 WORKDIR /user-service-f
