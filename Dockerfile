@@ -19,7 +19,7 @@ WORKDIR /home/ubuntu/
 
 RUN git clone https://github.com/cinguilherme/pymicser.git \
 	&& mkdir user-service-f \
-	&& mv -R /home/ubuntu/pymicser/ /home/ubuntu/user-service-f/
+	&& mv /home/ubuntu/pymicser /home/ubuntu/user-service-f
 
 WORKDIR /user-service-f
 
