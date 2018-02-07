@@ -12,8 +12,8 @@ UserServices BluePrint
 """ API function get all users: if unnable to fetch from NSql,
  fetch from local JSON"""
 
+# Exemplo de retorno de documentação de um método.
 @userBP.route("/users/doc", methods=['GET'])
-"""Exemplo de retorno de documentação de um método."""
 def users_doc():
     return allUsers.__doc__
 
