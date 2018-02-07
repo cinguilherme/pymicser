@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 LABEL author="Cintra, Guilherme 'cinguilherme@gmail.com'"
 
-RUN adduser ubuntu
+RUN mkdir /home/ubuntu/
 
 WORKDIR /home/ubuntu/
 
@@ -12,6 +12,7 @@ RUN apt-get update -y \
 	&& tar -xf Python-3.6.4.tgz \
 	&& cd Python-3.6.4 \
 	&& ./configure \
+	&& make \
 	&& make altinstall
 
 WORKDIR /home/ubuntu/
